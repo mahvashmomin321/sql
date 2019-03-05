@@ -1,0 +1,51 @@
+2)SELECT last_name,employees.department_id,department_name
+    -> FROM employees
+    -> JOIN departments
+    -> ON departments.department_id=employees.department_id;
+
+3)SELECT emp.last_name "EMPLOYEE",emp.employee_id "EMP#",mgr.last_name "MANAGER",mgr.employee_id "MGR#"
+    -> FROM employees emp
+    -> INNER JOIN employees mgr
+    -> ON emp.manager_id=mgr.employee_id;
+
+4) SELECT emp.last_name "EMPLOYEE",emp.department_id as "DEPARTMENT_ID",collegue.last_name as "COLLEQUE",collegue.department_id as "EMPLOYEE_ID"
+    -> FROM employees emp
+    -> INNER JOIN employees collegue
+    -> ON emp.department_id= collegue.department_id
+    -> WHERE emp.employee_id<>collegue.employee_id
+    -> ORDER BY emp.department_id,emp.last_name,collegue.last_name;
+
+5) SELECT last_name,hire_date
+    -> FROM employees
+    -> WHERE department_id=(SELECT department_id
+    -> FROM employees
+    -> WHERE last_name='Zlotkey')
+    -> AND last_name<>'Zlotkey';
+
+6)SELECT employee_id,last_name,salary
+    -> FROM employees
+    -> WHERE salary>=(SELECT AVG(salary) FROM employees)
+    -> ORDER BY salary;
+
+7) SELECT last_name,employees.department_id,departments.department_id
+    -> FROM employees
+    -> JOIN departments
+    -> ON employees.department_id=departments.department_id AND last_name like "%u%";
+
+8) SELECT last_name,employees.department_id,job_id
+    -> FROM employees
+    -> JOIN departments
+    -> ON departments.department_id = employees.department_id
+    -> WHERE departments.location_id=1700;
+
+9)SELECT last_name,emp.department_id,job_id
+    -> FROM employees emp
+    -> JOIN departments dept
+    -> ON emp.department_id=dept.department_id
+    -> WHERE dept.department_name = 'Executive';
+
+10) SELECT last_name,employee_id,salary
+    -> FROM employees,departments
+    -> WHERE salary>(SELECT AVG(salary)FROM employees)
+    -> AND employees.department_id= departments.department_id
+    -> AND last_name like '%u%';
